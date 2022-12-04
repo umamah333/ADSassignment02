@@ -221,3 +221,34 @@ df["Fossil Fuel Consumption (%)"] = df["Fossil Fuel Consumption (%)"].astype("fl
 print(df.dtypes)
 
 #statistical analysis.........
+
+#Heatmap to analyse the correlation between the variables taken
+
+# Exclude the categorical features from the matrix
+#df.drop(columns=['Year','Country'], inplace=True, axis=1)
+
+
+# plot a correlation matrix
+fig, ax = plt.subplots(figsize=(10,10))
+sns.heatmap(df.corr(), cmap='RdBu', center=0,ax=ax)
+plt.savefig('correlation_us.png')
+plt.show()
+
+
+#lineplot to see the electric power cnsumption of canada as canada is the country of my dataframe with least population
+
+
+
+# read the columns from the df for Canada
+df=df.loc[100:124, ['Electric Power Consumption(kWH per capita)','Total Population', 'Year']]  
+
+print("First few records of the data: ")
+display(df.head())
+
+# line plot
+plt.figure(figsize=(6, 5))
+plt.title('Total electric power consumption of Canada')
+sns.set(style="whitegrid")
+plt.ticklabel_format(style = 'plain')
+plt.xticks(rotation=60)
+sns.lineplot(x='Total Population', y='Electric Power Consumption(kWH per capita)', palette="colorblind",data=df, linewidth=2.5)
