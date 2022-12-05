@@ -281,6 +281,7 @@ display(in_cn_df.head())
 # scatter plot
 plt.figure(figsize=(7, 5))
 plt.ticklabel_format(style = 'plain')
+plt.title('Electric consumption:India V/S Canada')
 plt.xticks(rotation=60)
 sns.set(style="whitegrid")
 plt.savefig('india china E.power usage graph.png')
@@ -431,6 +432,7 @@ df6g.head(40)
 # set figure size
 plt.figure(figsize=(7, 5))
 sns.set(style="whitegrid")
+plt.title('GDP in2012')
 # plot using seaborn library
 ax=sns.lineplot(x='Year', y='GDP in USD', hue='Country', style="Country",palette="Set2", markers=True, dashes=False, data=df6g, linewidth=2.5)
 plt.savefig('gdp comparison.png')
