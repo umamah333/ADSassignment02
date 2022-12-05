@@ -349,6 +349,7 @@ plt.title("Energy Consumption in Great Britian\n")
 plt.xlabel('Year')
 plt.ylabel('Energy Consumption')
 plt.xticks(rotation=60)
+plt.savefig('GB energy consumption.png')
 plt.show()
 
 
@@ -399,4 +400,72 @@ plt.figure(figsize=(7, 5))
 # plot the chart using matplotlib.pyplot library
 df_merged.plot(kind='bar',x='Country',y=['T.pop in 2000','T.pop in 2010'],color=['red', 'green'])
 plt.title('Population comparison in 2000 and 2010')
+plt.savefig('total population comparison.png')
+
+#extracting the gdp for last 10 years
+# function to extract specific columns from the DFs of all countries
+
+# for India
+indfg=IN_df[['GDP in USD','Country','Year']]
+    
+# for China
+chinadfg=CN_df[['GDP in USD', 'Country','Year']]
+#for USA
+usadfg=US_df[['GDP in USD', 'Country','Year']]
+#for great britain
+gbdfg=GB_df[['GDP in USD','Country','Year']]
+#for canada
+candfg=CA_df[['GDP in USD','Country','Year']]
+#for south africa
+southdfg=ZA_df[['GDP in USD','Country','Year']]
+#for Japan
+japdfg=JP_df[['GDP in USD','Country','Year']]
+# combine the two dataframes
+lstg=[indfg,chinadfg,usadfg,gbdfg,candfg,southdfg,japdfg]
+df6g = pd.concat(lstg)
+df6g = pd.DataFrame(df6g)
+df6g = df6g.reset_index(drop=True)
+df6g = df6g[df6g.Year >= 2004]
+df6g.head(40)
+
+# set figure size
+plt.figure(figsize=(7, 5))
+sns.set(style="whitegrid")
+# plot using seaborn library
+ax=sns.lineplot(x='Year', y='GDP in USD', hue='Country', style="Country",palette="Set2", markers=True, dashes=False, data=df6g, linewidth=2.5)
+plt.savefig('gdp comparison.png')
+
+
+#agricultural and industrial employment comparison
+# function to extract specific columns from the DFs of all countries
+# for India
+indf7=IN_df[['Employment in Industry(%)', 'Employment in Agriculture(%)','Country','Year']]
+    
+# for China
+chinadf1=CN_df[['Employment in Industry(%)', 'Employment in Agriculture(%)' , 'Country','Year']]
+#for USA
+usadf2=US_df[['Employment in Industry(%)', 'Employment in Agriculture(%)', 'Country','Year']]
+#for great britain
+gbdf3=GB_df[['Employment in Industry(%)', 'Employment in Agriculture(%)','Country','Year']]
+#for canada
+candf4=CA_df[['Employment in Industry(%)', 'Employment in Agriculture(%)','Country','Year']]
+#for south africa
+southdf5=ZA_df[['Employment in Industry(%)', 'Employment in Agriculture(%)','Country','Year']]
+#for Japan
+japdf6=JP_df[['Employment in Industry(%)', 'Employment in Agriculture(%)','Country','Year']]
+# combine the two dataframes
+lst=[indf7,chinadf1,usadf2,gbdf3,candf4,southdf5,japdf6]
+df6ae = pd.concat(lst)
+df6ae = pd.DataFrame(df6ae)
+df6ae = df6ae.reset_index(drop=True)
+df6ae = df6ae[df6ae.Year == 2012]
+df6ae.head(80)
+
+# bar plot
+plt.figure(figsize=(7, 5))
+# plot the chart using matplotlib.pyplot library
+df6ae.plot(kind='bar',x='Country',y=['Employment in Industry(%)','Employment in Agriculture(%)'],color=['purple', 'pink'])
+plt.title('employment in Industries v/s Agriculture in 2012' )
+plt.savefig('empolyment comparison.png')
+                     
 
